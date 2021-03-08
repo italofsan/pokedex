@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../../services/api";
+import { formatId } from "../../utils";
 
 interface ParamTypes {
   id: string;
@@ -9,7 +12,7 @@ interface ParamTypes {
 interface Pokemon {
   id?: number;
   name?: string;
-  abilities?: string;
+  abilities?: string[];
   types?: string[];
   moves?: string[];
   stats?: {
@@ -46,11 +49,22 @@ const Details: React.FC = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
+      toast.error("Pokemon not found!", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
   useEffect(() => {
-    getPokemon(id);
+    if (id) {
+      getPokemon(id);
+    }
   }, [id]);
 
   useEffect(() => {
@@ -61,7 +75,31 @@ const Details: React.FC = () => {
     return <div>Carregando...</div>;
   }
 
-  return <div>Detalhes</div>;
+  return (
+    <div>
+      <Typography>Detalhes</Typography>
+      <Typography>{pokemon?.name}</Typography>
+
+      <img
+        src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
+          id
+        )}.png`}
+      />
+
+      {pokemon?.types?.map((type) => (
+        <Typography>{type}</Typography>
+      ))}
+      {pokemon?.stats?.map((stat) => (
+        <Typography>{`${stat.name}: ${stat.value}`}</Typography>
+      ))}
+      {pokemon?.abilities?.map((ability) => (
+        <Typography key={ability}>{ability}</Typography>
+      ))}
+      {pokemon?.moves?.map((move) => (
+        <Typography key={move}>{move}</Typography>
+      ))}
+    </div>
+  );
 };
 
 export default Details;
