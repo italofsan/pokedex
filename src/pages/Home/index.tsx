@@ -4,7 +4,6 @@ import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 
 import api from "../../services/api";
-import { formatId } from "../../utils";
 import PokemonCard from "../../components/PokemonCard";
 
 interface IPokemon {
@@ -14,14 +13,13 @@ interface IPokemon {
 
 const Home: React.FC = () => {
   const classes = useStyles();
-  const [numberPages, setNumberPages] = useState<number>(0);
+  // Pokedex has 898 Pokemons. Above 898, pokemons have no images
+  const numberPokedex = Math.floor(898 / 20) + 1;
   const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
   const [page, setPage] = useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-
-  const numeroPokemons = Math.floor(898 / 20) + 1;
 
   const getPokemons = async (value: number) => {
     try {
@@ -33,17 +31,17 @@ const Home: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    async function getAllPokemons() {
-      try {
-        const { data } = await api.get("pokemon");
-        setNumberPages(Math.floor(data.count / 20) + 1);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getAllPokemons();
-  }, []);
+  // useEffect(() => {
+  //   async function getAllPokemons() {
+  //     try {
+  //       const { data } = await api.get("pokemon");
+  //       setNumberPages(Math.floor(data.count / 20) + 1);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getAllPokemons();
+  // }, []);
 
   useEffect(() => {
     console.log(page);
@@ -80,6 +78,7 @@ const Home: React.FC = () => {
           }
           return (
             <PokemonCard
+              key={pokemon.name}
               id={pokemonId.toString()}
               name={pokemon.name}
               url={pokemon.url}
@@ -87,7 +86,8 @@ const Home: React.FC = () => {
           );
         })}
       </div>
-      <Pagination count={numeroPokemons} page={page} onChange={handleChange} />
+      {/* Pokedex has 898 Pokemons. Some Pokemons have no images */}
+      <Pagination count={numberPokedex} page={page} onChange={handleChange} />
     </div>
   );
 };

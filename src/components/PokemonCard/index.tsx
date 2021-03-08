@@ -28,7 +28,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({ id, name, url }) => {
       <Card className={classes.card}>
         <CardActionArea
           onClick={
-            () => console.log()
+            () => console.log(name)
             // history.push({
             //   pathname: `/${id}/details`,
             //   state: {
