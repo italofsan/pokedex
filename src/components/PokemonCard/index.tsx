@@ -26,23 +26,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({ id, name, url }) => {
   return (
     <>
       <Card className={classes.card}>
-        <CardActionArea
-          onClick={
-            () => console.log(name)
-            // history.push({
-            //   pathname: `/${id}/details`,
-            //   state: {
-            //     pokeId: id,
-            //     pokeName: pokeName,
-            //     pokeImage: pokeImage,
-            //     pokeTypes: pokeTypes,
-            //     pokeAbilities: pokeAbilities,
-            //     pokeStats: pokeStats,
-            //     pokeMoves: pokeMoves,
-            //   },
-            // })
-          }
-        >
+        <CardActionArea onClick={() => history.push(`/${id}/details`)}>
           <CardContent
             style={{ display: "flex", justifyContent: "space-between" }}
           >

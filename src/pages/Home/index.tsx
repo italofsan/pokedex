@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 
