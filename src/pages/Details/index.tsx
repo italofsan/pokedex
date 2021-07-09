@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { errorMessage } from "../../components/Messages";
 import { formatId } from "../../utils";
 
-import api from "../../services/api";
+import { api } from "../../services/api";
 
 interface ParamTypes {
   id: string;
