@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import api from "../../services/api";
+
+import { errorMessage } from "../../components/Messages";
 import { formatId } from "../../utils";
+
+import api from "../../services/api";
 
 interface ParamTypes {
   id: string;
@@ -21,10 +23,10 @@ interface Pokemon {
   }[];
 }
 
-const Details: React.FC = () => {
+export const Details = () => {
   const { id } = useParams<ParamTypes>();
 
-  const [pokemon, setPokemon] = useState<Pokemon>();
+  const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon);
   const [loading, setLoading] = useState(false);
 
   const getPokemon = async (id: string) => {
@@ -49,15 +51,7 @@ const Details: React.FC = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
-      toast.error("Pokemon not found!", {
-        position: "top-center",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      errorMessage("Pokemon not found!");
     }
   };
 
@@ -101,5 +95,3 @@ const Details: React.FC = () => {
     </div>
   );
 };
-
-export default Details;

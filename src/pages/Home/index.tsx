@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "@material-ui/lab/Pagination";
-import { makeStyles } from "@material-ui/core/styles";
 
-import api from "../../services/api";
-import PokemonCard from "../../components/PokemonCard";
+import { PokemonCard } from "../../components/PokemonCard";
+
+import { api } from "../../services/api";
+
+import { useStyles } from "./styles";
 
 interface IPokemon {
   name: string;
   url: string;
 }
 
-const Home: React.FC = () => {
+export const Home = () => {
   const classes = useStyles();
   // Pokedex has 898 Pokemons. Above 898, pokemons have no images
   const numberPokedex = Math.floor(898 / 20) + 1;
   const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
   const [page, setPage] = useState(1);
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
   };
 
@@ -78,26 +83,18 @@ const Home: React.FC = () => {
           return (
             <PokemonCard
               key={pokemon.name}
-              id={pokemonId.toString()}
+              id={String(pokemonId)}
               name={pokemon.name}
-              url={pokemon.url}
             />
           );
         })}
       </div>
       {/* Pokedex has 898 Pokemons. Some Pokemons have no images */}
-      <Pagination count={numberPokedex} page={page} onChange={handleChange} />
+      <Pagination
+        count={numberPokedex}
+        page={page}
+        onChange={handleChangePage}
+      />
     </div>
   );
 };
-
-export default Home;
-
-const useStyles = makeStyles({
-  pokemonName: {
-    cursor: "pointer",
-    backgroundColor: "#CCC",
-    borderRadius: 2,
-    marginBottom: 5,
-  },
-});

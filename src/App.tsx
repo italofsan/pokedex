@@ -2,7 +2,7 @@ import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Routes from "./routes";
+import { Routes } from "./routes";
 
 const theme = createMuiTheme({
   typography: {
@@ -10,7 +10,7 @@ const theme = createMuiTheme({
   },
 });
 
-function App() {
+export function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -19,5 +19,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

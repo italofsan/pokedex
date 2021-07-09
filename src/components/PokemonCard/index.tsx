@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Card,
@@ -8,18 +7,18 @@ import {
   CardMedia,
   Typography,
 } from "@material-ui/core";
-import { withRouter, useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 import { formatId } from "../../utils";
 
-interface IPokemonCardProps {
+import { useStyles } from "./styles";
+
+interface PokemonCardProps {
   id: string;
   name: string;
-  url: string;
 }
 
-const PokemonCard: React.FC<IPokemonCardProps> = ({ id, name, url }) => {
+export function PokemonCard({ id, name }: PokemonCardProps) {
   const history = useHistory();
   const classes = useStyles();
 
@@ -27,16 +26,11 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({ id, name, url }) => {
     <>
       <Card className={classes.card}>
         <CardActionArea onClick={() => history.push(`/${id}/details`)}>
-          <CardContent
-            style={{ display: "flex", justifyContent: "space-between" }}
-          >
-            <Typography variant="h5" style={{ textTransform: "capitalize" }}>
+          <CardContent className={classes.cardContent}>
+            <Typography variant='h5' className={classes.pokemonName}>
               {name}
             </Typography>
-            <Typography
-              variant="h5"
-              style={{ textTransform: "capitalize", color: "#CCC" }}
-            >
+            <Typography variant='h5' className={classes.pokemonId}>
               #{formatId(id)}
             </Typography>
           </CardContent>
@@ -50,23 +44,9 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({ id, name, url }) => {
         </CardActionArea>
         <CardActions>
           <Button
-            size="small"
-            color="primary"
-            onClick={
-              () => console.log(name)
-              //   history.push({
-              //     pathname: `/${id}/details`,
-              //     state: {
-              //       pokeId: id,
-              //       pokeName: pokeName,
-              //       pokeImage: pokeImage,
-              //       pokeTypes: pokeTypes,
-              //       pokeAbilities: pokeAbilities,
-              //       pokeStats: pokeStats,
-              //       pokeMoves: pokeMoves,
-              //     },
-              //   })
-            }
+            size='small'
+            color='primary'
+            onClick={() => history.push(`/${id}/details`)}
           >
             <Typography>More Informations</Typography>
           </Button>
@@ -74,50 +54,4 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({ id, name, url }) => {
       </Card>
     </>
   );
-};
-
-export default PokemonCard;
-
-const useStyles = makeStyles({
-  text: {
-    textTransform: "capitalize",
-  },
-  card: {
-    width: 250,
-    display: "inline-block",
-    transition: ".3s ease",
-    "&:hover": {
-      transform: "scale(1.1)",
-    },
-  },
-  cardContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-  },
-  media: {
-    height: 250,
-  },
-  title: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  titleText: {
-    textTransform: "capitalize",
-  },
-  titleId: {
-    color: "#ccc",
-    marginLeft: 20,
-  },
-  informations: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  section: {
-    marginTop: 20,
-  },
-  sectionTitleText: {
-    marginBottom: 10,
-  },
-});
+}
