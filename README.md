@@ -27,6 +27,10 @@ This is a frontend project coded by Italo Santos. This web app lets you search f
   $ yarn start
 ```
 
+## Pokedex All Pokemons
+![All Pokemons](https://user-images.githubusercontent.com/66754958/125203134-9d0a7700-e24d-11eb-8fa2-d33f50258883.png)
+
+
 ## Technologies
 - [TypeScript](https://www.typescriptlang.org/)
 - [Material UI](https://material-ui.com)
