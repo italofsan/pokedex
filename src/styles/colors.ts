@@ -1,14 +1,4 @@
-export function formatId(id: string) {
-  if (id.length === 1) {
-    return "00" + id;
-  } else if (id.length === 2) {
-    return "0" + id;
-  } else {
-    return id;
-  }
-}
-
-export const typeColors = {
+export const typePokemonColors = {
   bug: "#729f3f",
   dragon: "#53a4cf",
   fairy: "#fdb9e9",
@@ -28,7 +18,3 @@ export const typeColors = {
   rock: "#a38c21",
   water: "#4592c4",
 };
-
-export function onlyNumbers(string: string) {
-  return string.replace(/[^0-9]/g, "").slice(1);
-}
