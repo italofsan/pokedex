@@ -1,9 +1,9 @@
-## Timesheet Oowlish
+## Pokedex App
 
 
 ## Description
 
-This is a frontend project coded by Italo Santos. This web app controls the working hours for a company's employees. The employees can register arrival, exit ,and lunch break times. They can also see the amount of hours above or below the expected working hours . The expected  amount of working hours is eight per day.
+This is a frontend project coded by Italo Santos. This web app lets you search for pokemons by ID, name, type and ability.
 
 
 ## Setup
