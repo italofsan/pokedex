@@ -5,6 +5,7 @@
 
 This is a frontend project coded by Italo Santos. This web app lets you search for pokemons by ID, name, type and ability.
 
+It is possible to see a production preview https://italofsan-pokedex.netlify.app
 
 ## Setup
 
