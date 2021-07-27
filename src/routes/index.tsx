@@ -4,7 +4,7 @@ import { Layout } from "../components/Layout";
 
 import { Details } from "../pages/Details";
 import { List } from "../pages/List";
-import { Home } from "../pages/Home";
+// import { Home } from "../pages/Home";
 
 export const Routes = () => {
   return (

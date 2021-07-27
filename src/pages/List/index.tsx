@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import {
   FormControl,
   Grid,
@@ -7,11 +7,11 @@ import {
   MenuItem,
   Select,
   TextField,
-  useTheme,
+  // useTheme,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 import Pagination from "@material-ui/lab/Pagination";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 import { PokemonCard } from "../../components/PokemonCard";
 import { errorMessage } from "../../components/Messages";
@@ -61,12 +61,12 @@ export function List() {
   const getPokemons = async (value: number) => {
     try {
       const { data } = await api.get(`pokemon?offset=${value * 20}&limit=20`);
-      console.log(
-        data.results.map((pokemon: any) => ({
-          name: pokemon.name,
-          id: onlyNumbers(pokemon.url),
-        }))
-      );
+      // console.log(
+      //   data.results.map((pokemon: any) => ({
+      //     name: pokemon.name,
+      //     id: onlyNumbers(pokemon.url),
+      //   }))
+      // );
       setPokemonList(
         data.results.map((pokemon: any) => ({
           name: pokemon.name,
@@ -93,7 +93,6 @@ export function List() {
     try {
       const { data } = await api.get(`pokemon/${name}`);
       console.log(data);
-      // console.log(data.results.map((pokemon: any) => pokemon.name));
       setPokemonList([
         {
           id: String(data.id),
@@ -205,22 +204,22 @@ export function List() {
 
       {pokemonList.map((pokemon: IPokemon) => {
         let pokemonId = pokemon.id;
-        if (Number(pokemonId) > 898) {
-          return;
+        if (Number(pokemonId) <= 898) {
+          return (
+            <Grid
+              item
+              xs={6}
+              sm={6}
+              md={6}
+              lg={3}
+              key={pokemon.name}
+              className={classes.pokemonCardContainer}
+            >
+              <PokemonCard pokemonData={pokemon} />
+            </Grid>
+          );
         }
-        return (
-          <Grid
-            item
-            xs={6}
-            sm={6}
-            md={6}
-            lg={3}
-            key={pokemon.name}
-            className={classes.pokemonCardContainer}
-          >
-            <PokemonCard pokemonData={pokemon} />
-          </Grid>
-        );
+        return null;
       })}
       {(!selectedPokemonType || !searchPokemon) && (
         <Grid container className={classes.pokemonPaginationContainer}>

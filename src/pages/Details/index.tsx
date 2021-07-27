@@ -65,9 +65,9 @@ export const Details = () => {
     getPokemon(id);
   }, [id]);
 
-  useEffect(() => {
-    console.log(pokemon);
-  }, [pokemon]);
+  // useEffect(() => {
+  //   console.log(pokemon);
+  // }, [pokemon]);
 
   if (loading) {
     return (
@@ -99,6 +99,7 @@ export const Details = () => {
               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
                 id
               )}.png`}
+              alt='Pokemon'
             />
           </div>
         </Grid>
@@ -134,6 +135,7 @@ export const Details = () => {
               if (item[0] === currentType) {
                 return item[1];
               }
+              return null;
             });
             return (
               <Typography
