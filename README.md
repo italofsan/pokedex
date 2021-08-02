@@ -16,7 +16,7 @@ It is possible to see a production preview https://italofsan-pokedex.netlify.app
   # Put these commands at the command prompt 
 
   # Clone this repository:
-  $ git clone https://gitlab.com/italofsan/pokedex.git
+  $ git clone https://github.com/italofsan/pokedex.git
 
   # Go to the folder:
   $ cd pokedex
