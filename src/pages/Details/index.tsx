@@ -89,8 +89,8 @@ export const Details = () => {
           </Typography>
         </div>
       </Grid>
-      <Grid container>
-        <Grid item lg={12} xs={12}>
+      <Grid container style={{ display: "flex", alignItems: "center" }}>
+        <Grid item lg={4} xs={12}>
           <div>
             <img
               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
@@ -101,7 +101,7 @@ export const Details = () => {
             />
           </div>
         </Grid>
-        <Grid item lg={12} xs={12} style={{ paddingBottom: 16 }}>
+        <Grid item lg={8} xs={12} style={{ paddingBottom: 16 }}>
           {pokemon.stats?.map((stat) => (
             <React.Fragment key={stat.name}>
               <Typography
@@ -116,7 +116,7 @@ export const Details = () => {
           ))}
         </Grid>
       </Grid>
-      <Grid container lg={6}>
+      <Grid container>
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography className={classes.titleSection}>Types</Typography>
           {pokemon?.types?.map((type) => {
@@ -151,7 +151,7 @@ export const Details = () => {
             {pokemon?.abilities?.join(", ")}
           </Typography>
         </Grid>
-        <Grid item lg={12}>
+        <Grid item lg={12} style={{ marginTop: 36 }}>
           <Typography className={classes.titleSection}>Moves</Typography>
           {pokemon.moves?.length !== 0 ? (
             <Typography className={classes.textMove}>
