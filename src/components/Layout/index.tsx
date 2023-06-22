@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import { useState, ReactNode } from "react";
 import {
   AppBar,
   Divider,
@@ -13,7 +13,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import { useStyles } from "./styles";
 
@@ -25,6 +25,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const location = useLocation();
+  const history = useHistory();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
@@ -39,7 +40,12 @@ export const Layout = ({ children }: LayoutProps) => {
         </Typography>
       </Toolbar>
       <List>
-        <ListItem to="/" component={Link} selected={location.pathname === "/"}>
+        <ListItem
+          onClick={() => history.push("/")}
+          selected={location.pathname === "/"}
+          style={{ cursor: "pointer" }}
+          role="btnHome"
+        >
           <ListItemText
             style={{
               color: location.pathname === "/" ? "red" : "black",
@@ -50,9 +56,10 @@ export const Layout = ({ children }: LayoutProps) => {
         </ListItem>
         <Divider />
         <ListItem
-          to="/pokemons"
-          component={Link}
+          onClick={() => history.push("/pokemons")}
           selected={location.pathname !== "/"}
+          style={{ cursor: "pointer" }}
+          role="btnAllPokemons"
         >
           <ListItemText
             style={{
