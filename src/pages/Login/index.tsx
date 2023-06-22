@@ -30,6 +30,10 @@ export const Login = () => {
     lastName: "",
   };
 
+  const handleSubmit = (values: any) => {
+    fakeLogin(values);
+  };
+
   const fakeLogin = (values: LoginData) => {
     if (!values.firstName) {
       return errorMessage("Please, type your first name!");
@@ -48,9 +52,7 @@ export const Login = () => {
     <Formik
       enableReinitialize
       initialValues={loginData}
-      onSubmit={(values) => {
-        fakeLogin(values);
-      }}
+      onSubmit={handleSubmit}
     >
       {({ handleChange, values, handleSubmit }) => (
         <FormikForm>
@@ -82,6 +84,7 @@ export const Login = () => {
                       size="small"
                       fullWidth
                       required
+                      inputProps={{ "data-testid": "firstNameInput" }}
                     />
                   </div>
                   <div style={{ marginTop: 12 }}>
@@ -95,17 +98,20 @@ export const Login = () => {
                       placeholder="Last Name"
                       variant="outlined"
                       color="secondary"
+                      role="textbox"
                       size="small"
                       fullWidth
                       required
+                      inputProps={{ "data-testid": "lastNameInput" }}
                     />
                   </div>
 
                   <Button
+                    type="submit"
                     className={classes.buttonLogin}
-                    onClick={() => handleSubmit()}
                     style={{ marginTop: 12 }}
                     fullWidth
+                    role="btnLogin"
                   >
                     Login
                   </Button>
