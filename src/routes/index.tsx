@@ -1,21 +1,10 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-
-import { Layout } from "../components/Layout";
-
-import { Details } from "../pages/Details";
-import { List } from "../pages/List";
-// import { Home } from "../pages/Home";
+import { useContext } from "react";
+import { AppRoutes } from "./app.routes";
+import { AuthRoutes } from "./auth.routes";
+import { AuthUserContext } from "../contexts/AuthUserContext";
 
 export const Routes = () => {
-  return (
-    <BrowserRouter>
-      <Layout>
-        <Switch>
-          <Route exact path='/' component={List} />
-          <Route exact path='/pokemons' component={List} />
-          <Route exact path='/pokemons/:id/details' component={Details} />
-        </Switch>
-      </Layout>
-    </BrowserRouter>
-  );
+  const { isSigned } = useContext(AuthUserContext);
+
+  return isSigned === true ? <AppRoutes /> : <AuthRoutes />;
 };

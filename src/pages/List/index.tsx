@@ -97,8 +97,6 @@ export const List = () => {
   }, [page]);
 
   useEffect(() => {
-    console.log("searchPokemon", searchPokemon.length);
-    console.log("selectedPokemonType", selectedPokemonType);
     if (selectedPokemonType) {
       getPokemonsByType(selectedPokemonType);
     } else {
