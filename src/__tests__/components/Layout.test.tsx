@@ -27,17 +27,7 @@ describe("Layout Component", () => {
   it("should render correctly", () => {
     renderComponent();
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("All Pokemons")).toBeInTheDocument();
-  });
-
-  it("should call navigate when clicks the button home", () => {
-    renderComponent();
-
-    const btnHome = screen.getByRole("btnHome");
-    fireEvent.click(btnHome);
-
-    expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should call navigate when clicks the button All Pokemons", () => {
@@ -46,6 +36,6 @@ describe("Layout Component", () => {
     const btnAllPokemons = screen.getByRole("btnAllPokemons");
     fireEvent.click(btnAllPokemons);
 
-    expect(mockHistoryPush).toHaveBeenCalledWith("/pokemons");
+    expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 });

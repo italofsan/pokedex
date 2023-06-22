@@ -57,7 +57,6 @@ export const Details = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
       errorMessage("Pokemon not found!");
     }
   };
