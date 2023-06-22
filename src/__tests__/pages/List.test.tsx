@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 
 import { BrowserRouter } from "react-router-dom";
 
-import { List } from "../../pages/List";
+import { ListPokemon } from "../../pages/List";
 
 // const mockHistoryPush = jest.fn();
 // jest.mock("react-router", () => ({
@@ -14,7 +14,7 @@ import { List } from "../../pages/List";
 // }));
 
 const renderComponent = () => {
-  render(<List />);
+  render(<ListPokemon />);
 };
 
 describe("Pokemon List", () => {

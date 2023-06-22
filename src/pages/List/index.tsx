@@ -28,7 +28,7 @@ import { api } from "../../services/api";
 import { useStyles } from "./styles";
 import { Pokemon } from "../../type";
 
-export const List = () => {
+export const ListPokemon = () => {
   const classes = useStyles();
 
   // Pokedex has 898 Pokemons. Above 898, pokemons have no images
@@ -51,7 +51,7 @@ export const List = () => {
       }));
       setPokemonList(returnedPokemonList);
     } catch (error) {
-      console.log(error);
+      return errorMessage("Pokemon not found");
     }
   };
 
@@ -69,7 +69,7 @@ export const List = () => {
       ];
       setPokemonList(returnedPokemon);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return errorMessage("Unable to search pokemon!");
     }
   };
@@ -83,7 +83,7 @@ export const List = () => {
       }));
       setPokemonList(returnedPokemonList);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return errorMessage("Unable to search pokemons by type!");
     }
   };
