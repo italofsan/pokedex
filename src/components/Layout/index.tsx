@@ -44,7 +44,7 @@ export const Layout = ({ children }: LayoutProps) => {
       </Toolbar>
       <List style={{ padding: 0 }}>
         <ListItem
-          onClick={() => history.push("/pokemons")}
+          onClick={() => history.push("/")}
           selected={location.pathname === "/"}
           style={{ cursor: "pointer" }}
           role="btnAllPokemons"

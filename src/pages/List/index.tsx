@@ -1,23 +1,15 @@
+import { useState, useEffect, ChangeEvent, Fragment } from "react";
 import {
-  useState,
-  useEffect,
-  ChangeEvent,
-  // FormEvent,
-  Fragment,
-} from "react";
-import {
-  // FormControl,
+  FormControl,
   Grid,
   IconButton,
-  // InputLabel,
+  InputLabel,
   MenuItem,
   Select,
   TextField,
-  // useTheme,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 import Pagination from "@material-ui/lab/Pagination";
-// import { useLocation } from "react-router-dom";
 
 import { PokemonCard } from "../../components/PokemonCard";
 import { errorMessage } from "../../components/Messages";
@@ -25,9 +17,10 @@ import { errorMessage } from "../../components/Messages";
 import { onlyNumbers } from "../../utils";
 import { api } from "../../services/api";
 
-import { useStyles } from "./styles";
-import { Pokemon } from "../../type";
 import { pokemonTypeList } from "../../constants";
+import { Pokemon } from "../../type";
+
+import { useStyles } from "./styles";
 
 export const ListPokemon = () => {
   const classes = useStyles();
@@ -114,15 +107,7 @@ export const ListPokemon = () => {
   return (
     <Grid container spacing={3}>
       <Grid container>
-        <Grid
-          item
-          xs={12}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "0px 12px 12px 12px",
-          }}
-        >
+        <Grid item xs={12} lg={3} className={classes.inputContainer}>
           <TextField
             label="Search by ID or Name"
             value={searchPokemon}
@@ -140,29 +125,27 @@ export const ListPokemon = () => {
             }}
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "0px 12px 12px 12px",
-          }}
-        >
-          <Select
-            labelId="pokemonTypeLabel"
-            value={selectedPokemonType}
-            onChange={handleChangeSelectPokemonType}
-            placeholder="Search by type"
-            fullWidth
-          >
-            <MenuItem value="">Search by type</MenuItem>
-            {pokemonTypeList.map((pokemonType) => (
-              <MenuItem value={pokemonType} key={pokemonType}>
-                {pokemonType.toUpperCase()}
+        <Grid item xs={12} lg={3} className={classes.inputContainer}>
+          <FormControl style={{ width: "100%" }}>
+            <InputLabel id="pokemonTypeLabel">Search by type</InputLabel>
+            <Select
+              id="pokemonTypeLabel"
+              labelId="pokemonTypeLabel"
+              value={selectedPokemonType}
+              onChange={handleChangeSelectPokemonType}
+              placeholder="Search by type"
+              fullWidth
+            >
+              <MenuItem value="">
+                <em>Search by type</em>
               </MenuItem>
-            ))}
-          </Select>
+              {pokemonTypeList.map((pokemonType) => (
+                <MenuItem value={pokemonType} key={pokemonType}>
+                  {pokemonType.toUpperCase()}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
 
