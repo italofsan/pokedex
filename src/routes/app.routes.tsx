@@ -11,7 +11,7 @@ export const AppRoutes = () => {
       <Layout>
         <Switch>
           <Route exact path="/" component={ListPokemon} />
-          <Route exact path="/pokemons" component={ListPokemon} />
+          {/* <Route exact path="/pokemons" component={ListPokemon} /> */}
           <Route exact path="/pokemons/:id/details" component={Details} />
         </Switch>
       </Layout>

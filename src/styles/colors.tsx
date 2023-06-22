@@ -1,4 +1,4 @@
-export const typePokemonColors = {
+export const pokemonTypeColors = {
   bug: "#729f3f",
   dragon: "#53a4cf",
   fairy: "#fdb9e9",

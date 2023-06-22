@@ -39,8 +39,8 @@ export const Layout = ({ children }: LayoutProps) => {
           Pokedex App
         </Typography>
       </Toolbar>
-      <List>
-        <ListItem
+      <List style={{ padding: 0 }}>
+        {/* <ListItem
           onClick={() => history.push("/")}
           selected={location.pathname === "/"}
           style={{ cursor: "pointer" }}
@@ -54,19 +54,32 @@ export const Layout = ({ children }: LayoutProps) => {
             Home
           </ListItemText>
         </ListItem>
-        <Divider />
+        <Divider /> */}
         <ListItem
           onClick={() => history.push("/pokemons")}
-          selected={location.pathname !== "/"}
+          selected={location.pathname === "/"}
           style={{ cursor: "pointer" }}
           role="btnAllPokemons"
         >
           <ListItemText
             style={{
-              color: location.pathname !== "/" ? "red" : "black",
+              color: location.pathname === "/" ? "red" : "black",
             }}
           >
             All Pokemons
+          </ListItemText>
+        </ListItem>
+        <ListItem
+          // onClick={() => history.push("/pokemons")}
+          style={{ cursor: "pointer" }}
+          role="btnexit"
+        >
+          <ListItemText
+          // style={{
+          //   color: location.pathname === "/" ? "red" : "black",
+          // }}
+          >
+            Exit
           </ListItemText>
         </ListItem>
       </List>

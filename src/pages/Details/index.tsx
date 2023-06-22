@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { errorMessage } from "../../components/Messages";
 
-import { typePokemonColors } from "../../styles/colors";
+import { pokemonTypeColors } from "../../styles/colors";
 import { formatId } from "../../utils";
 
 import pikachuLoading from "../../assets/loading.gif";
@@ -121,7 +121,7 @@ export const Details = () => {
           <Typography className={classes.titleSection}>Types</Typography>
           {pokemon?.types?.map((type) => {
             const currentType = type;
-            const colorType = Object.entries(typePokemonColors).find((item) => {
+            const colorType = Object.entries(pokemonTypeColors).find((item) => {
               if (item[0] === currentType) {
                 return item[1];
               }

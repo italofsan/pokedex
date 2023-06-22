@@ -22,11 +22,12 @@ import Pagination from "@material-ui/lab/Pagination";
 import { PokemonCard } from "../../components/PokemonCard";
 import { errorMessage } from "../../components/Messages";
 
-import { onlyNumbers, pokemonTypeList } from "../../utils";
+import { onlyNumbers } from "../../utils";
 import { api } from "../../services/api";
 
 import { useStyles } from "./styles";
 import { Pokemon } from "../../type";
+import { pokemonTypeList } from "../../constants";
 
 export const ListPokemon = () => {
   const classes = useStyles();

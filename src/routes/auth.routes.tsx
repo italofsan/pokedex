@@ -1,17 +1,14 @@
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
-import { Layout } from "../components/Layout";
-
-import { List } from "../pages/List";
+import { Login } from "../pages/Login";
 
 export const AuthRoutes = () => {
   return (
     <BrowserRouter>
-      <Layout>
-        <Switch>
-          <Route exact path="/" component={List} />
-        </Switch>
-      </Layout>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Redirect to={{ pathname: "/" }} />
+      </Switch>
     </BrowserRouter>
   );
 };

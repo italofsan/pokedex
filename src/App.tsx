@@ -3,6 +3,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes } from "./routes";
+import { AuthUserContextProvider } from "./contexts/AuthUserContext";
 
 const theme = createMuiTheme({
   typography: {
@@ -12,10 +13,12 @@ const theme = createMuiTheme({
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Routes />
-      <ToastContainer limit={3} transition={Slide} />
-    </ThemeProvider>
+    <AuthUserContextProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes />
+        <ToastContainer limit={3} transition={Slide} />
+      </ThemeProvider>
+    </AuthUserContextProvider>
   );
 }
