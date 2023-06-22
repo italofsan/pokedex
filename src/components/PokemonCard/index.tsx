@@ -31,6 +31,7 @@ export const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
       <Card className={classes.card}>
         <CardActionArea
           onClick={() => history.push(`/pokemons/${pokemonData.id}/details`)}
+          role="pokemonCard"
         >
           <CardContent className={classes.cardContent}>
             <Typography className={classes.pokemonName}>
@@ -53,6 +54,7 @@ export const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
             size="small"
             variant="text"
             onClick={() => history.push(`/pokemons/${pokemonData.id}/details`)}
+            role="btnMoreInfo"
           >
             <Typography style={{ color: "red" }}>More Information</Typography>
           </Button>
