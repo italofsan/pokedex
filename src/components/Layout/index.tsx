@@ -1,4 +1,4 @@
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useContext } from "react";
 import {
   AppBar,
   Divider,
@@ -13,7 +13,9 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+
+import { AuthUserContext } from "../../contexts/AuthUserContext";
 
 import { useStyles } from "./styles";
 
@@ -22,10 +24,11 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const classes = useStyles();
-  const theme = useTheme();
+  const { setIsSigned } = useContext(AuthUserContext);
   const location = useLocation();
   const history = useHistory();
+  const classes = useStyles();
+  const theme = useTheme();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
@@ -34,27 +37,12 @@ export const Layout = ({ children }: LayoutProps) => {
 
   const drawer = (
     <div>
-      <Toolbar style={{ backgroundColor: "red" }}>
+      <Toolbar style={{ backgroundColor: "#DB0F27" }}>
         <Typography variant="h6" noWrap style={{ color: "#FFF" }}>
           Pokedex App
         </Typography>
       </Toolbar>
       <List style={{ padding: 0 }}>
-        {/* <ListItem
-          onClick={() => history.push("/")}
-          selected={location.pathname === "/"}
-          style={{ cursor: "pointer" }}
-          role="btnHome"
-        >
-          <ListItemText
-            style={{
-              color: location.pathname === "/" ? "red" : "black",
-            }}
-          >
-            Home
-          </ListItemText>
-        </ListItem>
-        <Divider /> */}
         <ListItem
           onClick={() => history.push("/pokemons")}
           selected={location.pathname === "/"}
@@ -69,18 +57,16 @@ export const Layout = ({ children }: LayoutProps) => {
             All Pokemons
           </ListItemText>
         </ListItem>
+        <Divider />
         <ListItem
-          // onClick={() => history.push("/pokemons")}
+          onClick={() => {
+            localStorage.setItem("signed", JSON.stringify(false));
+            setIsSigned(false);
+          }}
           style={{ cursor: "pointer" }}
           role="btnexit"
         >
-          <ListItemText
-          // style={{
-          //   color: location.pathname === "/" ? "red" : "black",
-          // }}
-          >
-            Exit
-          </ListItemText>
+          <ListItemText>Exit</ListItemText>
         </ListItem>
       </List>
     </div>

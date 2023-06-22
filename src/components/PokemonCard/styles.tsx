@@ -12,16 +12,12 @@ export const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         transform: "scale(1.1)",
       },
-      // [theme.breakpoints.down("xs")]: {
-      //   width: "100%",
-      //   display: "flex",
-      // },
     },
     cardContent: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-      // backgroundColor: "#EEE",
+
       [theme.breakpoints.down("xs")]: {
         padding: theme.spacing(1),
       },
@@ -32,12 +28,8 @@ export const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     media: {
-      // backgroundColor: "#EEE",
       height: 250,
       [theme.breakpoints.down("xs")]: {
-        // marginLeft: theme.spacing(2),
-        // marginBottom: theme.spacing(2),
-        // width: "50%",
         height: 150,
       },
     },
@@ -51,9 +43,6 @@ export const useStyles = makeStyles((theme: Theme) =>
     titleId: {
       color: "#ccc",
       marginLeft: 20,
-    },
-    cardAction: {
-      // backgroundColor: "#EEE",
     },
     section: {
       marginTop: 20,

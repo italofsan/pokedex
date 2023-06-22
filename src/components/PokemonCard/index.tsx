@@ -49,7 +49,7 @@ export const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
             title={pokemonData.name}
           />
         </CardActionArea>
-        <CardActions className={classes.cardAction}>
+        <CardActions>
           <Button
             size="small"
             variant="text"
