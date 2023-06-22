@@ -105,7 +105,7 @@ export const ListPokemon = () => {
   }, [searchPokemon, selectedPokemonType]);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} style={{ height: "90%" }}>
       <Grid container>
         <Grid item xs={12} lg={3} className={classes.inputContainer}>
           <TextField
@@ -113,6 +113,11 @@ export const ListPokemon = () => {
             value={searchPokemon}
             fullWidth
             onChange={(e) => setSearchPokemon(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                getPokemon(searchPokemon);
+              }
+            }}
             InputProps={{
               endAdornment: (
                 <IconButton
@@ -173,20 +178,20 @@ export const ListPokemon = () => {
             const pokemonId = pokemon.id;
             if (Number(pokemonId) <= 898) {
               return (
-                <Fragment key={pokemon.name}>
-                  <Grid xs={3} />
+                <Grid container>
+                  <Grid item xs={3} lg={4} />
                   <Grid
                     item
                     xs={6}
                     sm={6}
                     md={6}
-                    lg={3}
+                    lg={4}
                     className={classes.pokemonCardContainer}
                   >
                     <PokemonCard pokemonData={pokemon} />
                   </Grid>
-                  <Grid xs={3} />
-                </Fragment>
+                  <Grid item xs={4} lg={4} />
+                </Grid>
               );
             }
             return null;

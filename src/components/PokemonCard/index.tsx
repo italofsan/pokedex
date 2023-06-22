@@ -27,39 +27,37 @@ export const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const classes = useStyles();
 
   return (
-    <>
-      <Card className={classes.card}>
-        <CardActionArea
+    <Card className={classes.card}>
+      <CardActionArea
+        onClick={() => history.push(`/pokemons/${pokemonData.id}/details`)}
+        role="pokemonCard"
+      >
+        <CardContent className={classes.cardContent}>
+          <Typography className={classes.pokemonName}>
+            {pokemonData.name}
+          </Typography>
+          <Typography className={classes.pokemonId}>
+            #{formatId(pokemonData.id)}
+          </Typography>
+        </CardContent>
+        <CardMedia
+          className={classes.media}
+          image={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
+            pokemonData.id
+          )}.png`}
+          title={pokemonData.name}
+        />
+      </CardActionArea>
+      <CardActions>
+        <Button
+          size="small"
+          variant="text"
           onClick={() => history.push(`/pokemons/${pokemonData.id}/details`)}
-          role="pokemonCard"
+          role="btnMoreInfo"
         >
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.pokemonName}>
-              {pokemonData.name}
-            </Typography>
-            <Typography className={classes.pokemonId}>
-              #{formatId(pokemonData.id)}
-            </Typography>
-          </CardContent>
-          <CardMedia
-            className={classes.media}
-            image={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
-              pokemonData.id
-            )}.png`}
-            title={pokemonData.name}
-          />
-        </CardActionArea>
-        <CardActions>
-          <Button
-            size="small"
-            variant="text"
-            onClick={() => history.push(`/pokemons/${pokemonData.id}/details`)}
-            role="btnMoreInfo"
-          >
-            <Typography style={{ color: "red" }}>More Information</Typography>
-          </Button>
-        </CardActions>
-      </Card>
-    </>
+          <Typography style={{ color: "red" }}>More Information</Typography>
+        </Button>
+      </CardActions>
+    </Card>
   );
 };

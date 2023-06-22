@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       width: 250,
+      height: "fit-content",
       display: "inline-block",
       transition: ".3s ease",
       "&:hover": {
