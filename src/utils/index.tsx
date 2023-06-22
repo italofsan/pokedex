@@ -1,3 +1,7 @@
+export function onlyNumbers(string: string) {
+  return string.replace(/[^0-9]/g, "").slice(1);
+}
+
 export function formatId(id: string) {
   if (id.length === 1) {
     return "00" + id;
@@ -29,6 +33,23 @@ export const typeColors = {
   water: "#4592c4",
 };
 
-export function onlyNumbers(string: string) {
-  return string.replace(/[^0-9]/g, "").slice(1);
-}
+export const pokemonTypeList = [
+  "bug",
+  "dragon",
+  "fairy",
+  "fire",
+  "ghost",
+  "ground",
+  "normal",
+  "psychic",
+  "steel",
+  "dark",
+  "electric",
+  "fighting",
+  "flying",
+  "grass",
+  "ice",
+  "poison",
+  "rock",
+  "water",
+];

@@ -16,66 +16,76 @@ import Pagination from "@material-ui/lab/Pagination";
 import { PokemonCard } from "../../components/PokemonCard";
 import { errorMessage } from "../../components/Messages";
 
-import { onlyNumbers } from "../../utils";
+import { onlyNumbers, pokemonTypeList } from "../../utils";
 import { api } from "../../services/api";
 
 import { useStyles } from "./styles";
+import { Pokemon } from "../../type";
 
-interface IPokemon {
-  name: string;
-  id: string;
-}
-
-const pokemonTypeList = [
-  "bug",
-  "dragon",
-  "fairy",
-  "fire",
-  "ghost",
-  "ground",
-  "normal",
-  "psychic",
-  "steel",
-  "dark",
-  "electric",
-  "fighting",
-  "flying",
-  "grass",
-  "ice",
-  "poison",
-  "rock",
-  "water",
-];
-
-export function List() {
+export const List = () => {
   const classes = useStyles();
 
   // Pokedex has 898 Pokemons. Above 898, pokemons have no images
   const numberPokedex = Math.floor(898 / 20) + 1;
-  const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [page, setPage] = useState(1);
   const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
+  const [searchPokemon, setSearchPokemon] = useState("");
+  const [selectedPokemonType, setSelectedPokemonType] = useState("");
+
   const getPokemons = async (value: number) => {
     try {
       const { data } = await api.get(`pokemon?offset=${value * 20}&limit=20`);
-      // console.log(
-      //   data.results.map((pokemon: any) => ({
-      //     name: pokemon.name,
-      //     id: onlyNumbers(pokemon.url),
-      //   }))
-      // );
-      setPokemonList(
-        data.results.map((pokemon: any) => ({
-          name: pokemon.name,
-          id: onlyNumbers(pokemon.url),
-        }))
-      );
+      const returnedPokemonList = data.results.map((pokemon: any) => ({
+        name: pokemon.name,
+        id: onlyNumbers(pokemon.url),
+      }));
+      setPokemonList(returnedPokemonList);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getPokemon = async (name: string) => {
+    if (!name) {
+      return errorMessage("É necessário inserir ID ou nome do pokemon");
+    }
+    try {
+      const { data } = await api.get(`pokemon/${name}`);
+      const returnedPokemon = [
+        {
+          id: String(data.id),
+          name: data.name,
+        },
+      ];
+      setPokemonList(returnedPokemon);
+    } catch (error) {
+      console.log(error);
+      return errorMessage("Unable to search pokemon!");
+    }
+  };
+
+  const getPokemonsByType = async (type: string) => {
+    try {
+      const { data } = await api.get(`/type/${type}/`);
+      const returnedPokemonList = data.pokemon.map((pokemon: any) => ({
+        name: pokemon.pokemon.name,
+        id: onlyNumbers(pokemon.pokemon.url),
+      }));
+      setPokemonList(returnedPokemonList);
+    } catch (error) {
+      console.log(error);
+      return errorMessage("Unable to search pokemons by type!");
+    }
+  };
+
+  const handleChangeSelectPokemonType = (
+    event: ChangeEvent<{ value: unknown }>
+  ) => {
+    setSelectedPokemonType(event.target.value as string);
   };
 
   useEffect(() => {
@@ -86,52 +96,11 @@ export function List() {
     getPokemons(page - 1);
   }, [page]);
 
-  const getPokemon = async (name: string) => {
-    if (!name) {
-      return errorMessage("É necessário inserir ID ou nome do pokemon");
-    }
-    try {
-      const { data } = await api.get(`pokemon/${name}`);
-      console.log(data);
-      setPokemonList([
-        {
-          id: String(data.id),
-          name: data.name,
-        },
-      ]);
-    } catch (error) {
-      console.log(error);
-      return errorMessage("Unable to search pokemon!");
-    }
-  };
-
-  const [searchPokemon, setSearchPokemon] = useState("");
-  const [selectedPokemonType, setSelectedPokemonType] = useState("");
-  const fetchPokemonsByType = async (type: string) => {
-    try {
-      const { data } = await api.get(`/type/${type}/`);
-      setPokemonList(
-        data.pokemon.map((pokemon: any) => ({
-          name: pokemon.pokemon.name,
-          id: onlyNumbers(pokemon.pokemon.url),
-        }))
-      );
-    } catch (error) {
-      console.log(error);
-      return errorMessage("Unable to search pokemons by type!");
-    }
-  };
-
-  const handleChangeSelectPokemonType = (
-    event: ChangeEvent<{ value: unknown }>
-  ) => {
-    console.log(event.target.value);
-    setSelectedPokemonType(event.target.value as string);
-  };
-
   useEffect(() => {
+    console.log("searchPokemon", searchPokemon.length);
+    console.log("selectedPokemonType", selectedPokemonType);
     if (selectedPokemonType) {
-      fetchPokemonsByType(selectedPokemonType);
+      getPokemonsByType(selectedPokemonType);
     } else {
       getPokemons(0);
     }
@@ -146,33 +115,25 @@ export function List() {
           style={{
             display: "flex",
             justifyContent: "center",
+            padding: "0px 12px 12px 12px",
           }}
         >
-          <form
-            className={classes.formControl}
-            onSubmit={(e: FormEvent) => {
-              e.preventDefault();
-              getPokemon(searchPokemon);
-              console.log("haha");
+          <TextField
+            label="Search by ID or Name"
+            value={searchPokemon}
+            fullWidth
+            onChange={(e) => setSearchPokemon(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  size="small"
+                  onClick={() => getPokemon(searchPokemon)}
+                >
+                  <SearchIcon />
+                </IconButton>
+              ),
             }}
-          >
-            <TextField
-              label='Search by ID or Name'
-              value={searchPokemon}
-              fullWidth
-              onChange={(e) => setSearchPokemon(e.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    size='small'
-                    onClick={() => getPokemon(searchPokemon)}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                ),
-              }}
-            />
-          </form>
+          />
         </Grid>
         <Grid
           item
@@ -180,56 +141,84 @@ export function List() {
           style={{
             display: "flex",
             justifyContent: "center",
+            padding: "0px 12px 12px 12px",
           }}
         >
-          <FormControl className={classes.formControl}>
-            <InputLabel id='pokemonTypeLabel'>Search by type</InputLabel>
-            <Select
-              labelId='pokemonTypeLabel'
-              value={selectedPokemonType}
-              onChange={handleChangeSelectPokemonType}
-              // style={{ width: 200 }}
-              fullWidth
-            >
-              <MenuItem value=''>Search by type</MenuItem>
-              {pokemonTypeList.map((pokemonType) => (
-                <MenuItem value={pokemonType} key={pokemonType}>
-                  {pokemonType.toUpperCase()}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <Select
+            labelId="pokemonTypeLabel"
+            value={selectedPokemonType}
+            onChange={handleChangeSelectPokemonType}
+            placeholder="Search by type"
+            fullWidth
+          >
+            <MenuItem value="">Search by type</MenuItem>
+            {pokemonTypeList.map((pokemonType) => (
+              <MenuItem value={pokemonType} key={pokemonType}>
+                {pokemonType.toUpperCase()}
+              </MenuItem>
+            ))}
+          </Select>
         </Grid>
       </Grid>
 
-      {pokemonList.map((pokemon: IPokemon) => {
-        let pokemonId = pokemon.id;
-        if (Number(pokemonId) <= 898) {
-          return (
-            <Grid
-              item
-              xs={6}
-              sm={6}
-              md={6}
-              lg={3}
-              key={pokemon.name}
-              className={classes.pokemonCardContainer}
-            >
-              <PokemonCard pokemonData={pokemon} />
-            </Grid>
-          );
-        }
-        return null;
-      })}
-      {(!selectedPokemonType || !searchPokemon) && (
-        <Grid container className={classes.pokemonPaginationContainer}>
-          <Pagination
-            count={numberPokedex}
-            page={page}
-            onChange={handleChangePage}
-          />
-        </Grid>
-      )}
+      {pokemonList.length !== 1
+        ? pokemonList.map((pokemon: Pokemon) => {
+            const pokemonId = pokemon.id;
+            if (Number(pokemonId) <= 898) {
+              return (
+                <Grid
+                  item
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={3}
+                  key={pokemon.name}
+                  className={classes.pokemonCardContainer}
+                >
+                  <PokemonCard pokemonData={pokemon} />
+                </Grid>
+              );
+            }
+            return null;
+          })
+        : pokemonList.map((pokemon: Pokemon) => {
+            const pokemonId = pokemon.id;
+            if (Number(pokemonId) <= 898) {
+              return (
+                <>
+                  <Grid xs={3} />
+                  <Grid
+                    item
+                    xs={6}
+                    sm={6}
+                    md={6}
+                    lg={3}
+                    key={pokemon.name}
+                    className={classes.pokemonCardContainer}
+                  >
+                    <PokemonCard pokemonData={pokemon} />
+                  </Grid>
+                  <Grid xs={3} />
+                </>
+              );
+            }
+            return null;
+          })}
+
+      <Grid
+        container
+        className={classes.pokemonPaginationContainer}
+        style={{
+          display:
+            pokemonList.length === 1 || selectedPokemonType ? "none" : "flex",
+        }}
+      >
+        <Pagination
+          count={numberPokedex}
+          page={page}
+          onChange={handleChangePage}
+        />
+      </Grid>
     </Grid>
   );
-}
+};

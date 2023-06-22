@@ -12,7 +12,7 @@ interface PokemonListProps {
   listPokemon: IPokemon[];
 }
 
-export function PokemonList() {
+export const PokemonList = () => {
   const classes = useStyles();
 
   return (
@@ -51,4 +51,4 @@ export function PokemonList() {
       </Grid>
     </main>
   );
-}
+};

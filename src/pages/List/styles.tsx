@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       minWidth: 120,
       padding: theme.spacing(1),
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down("md")]: {
         width: "100%",
       },
     },

@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export function successMessage(message: string) {
+export const successMessage = (message: string) => {
   return toast.success(message, {
     position: "top-center",
     autoClose: 2500,
@@ -10,9 +10,9 @@ export function successMessage(message: string) {
     draggable: true,
     progress: undefined,
   });
-}
+};
 
-export function infoMessage(message: string) {
+export const infoMessage = (message: string) => {
   return toast.info(message, {
     position: "top-center",
     autoClose: 2500,
@@ -22,9 +22,9 @@ export function infoMessage(message: string) {
     draggable: true,
     progress: undefined,
   });
-}
+};
 
-export function errorMessage(message: string) {
+export const errorMessage = (message: string) => {
   return toast.error(message, {
     position: "top-center",
     autoClose: 2500,
@@ -34,4 +34,4 @@ export function errorMessage(message: string) {
     draggable: true,
     progress: undefined,
   });
-}
+};

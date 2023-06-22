@@ -73,11 +73,11 @@ export const Details = () => {
     return (
       <Grid
         container
-        justify='center'
-        alignItems='center'
+        justify="center"
+        alignItems="center"
         style={{ minHeight: "93%" }}
       >
-        <img src={pikachuLoading} alt='Loading' />
+        <img src={pikachuLoading} alt="Loading" />
       </Grid>
     );
   }
@@ -92,14 +92,14 @@ export const Details = () => {
           </Typography>
         </div>
       </Grid>
-      <Grid container lg={6} xs={12}>
+      <Grid container>
         <Grid item lg={12} xs={12}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
                 id
               )}.png`}
-              alt='Pokemon'
+              alt="Pokemon"
             />
           </div>
         </Grid>
@@ -110,7 +110,7 @@ export const Details = () => {
                 style={{ fontSize: 24, textTransform: "capitalize" }}
               >{`${stat.name}: ${stat.value}`}</Typography>
               <LinearProgress
-                variant='determinate'
+                variant="determinate"
                 value={(stat.value * 100) / 255}
                 style={{ height: 16, borderRadius: 10 }}
               />

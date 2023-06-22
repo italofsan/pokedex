@@ -22,7 +22,7 @@ interface PokemonCardProps {
   pokemonData: IPokemon;
 }
 
-export function PokemonCard({ pokemonData }: PokemonCardProps) {
+export const PokemonCard = ({ pokemonData }: PokemonCardProps) => {
   const history = useHistory();
   const classes = useStyles();
 
@@ -50,8 +50,8 @@ export function PokemonCard({ pokemonData }: PokemonCardProps) {
         </CardActionArea>
         <CardActions className={classes.cardAction}>
           <Button
-            size='small'
-            variant='text'
+            size="small"
+            variant="text"
             onClick={() => history.push(`/pokemons/${pokemonData.id}/details`)}
           >
             <Typography style={{ color: "red" }}>More Information</Typography>
@@ -60,4 +60,4 @@ export function PokemonCard({ pokemonData }: PokemonCardProps) {
       </Card>
     </>
   );
-}
+};

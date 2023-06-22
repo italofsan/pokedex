@@ -21,7 +21,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-export function Layout({ children }: LayoutProps) {
+export const Layout = ({ children }: LayoutProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const location = useLocation();
@@ -34,12 +34,12 @@ export function Layout({ children }: LayoutProps) {
   const drawer = (
     <div>
       <Toolbar style={{ backgroundColor: "red" }}>
-        <Typography variant='h6' noWrap style={{ color: "#FFF" }}>
+        <Typography variant="h6" noWrap style={{ color: "#FFF" }}>
           Pokedex App
         </Typography>
       </Toolbar>
       <List>
-        <ListItem to='/' component={Link} selected={location.pathname === "/"}>
+        <ListItem to="/" component={Link} selected={location.pathname === "/"}>
           <ListItemText
             style={{
               color: location.pathname === "/" ? "red" : "black",
@@ -50,7 +50,7 @@ export function Layout({ children }: LayoutProps) {
         </ListItem>
         <Divider />
         <ListItem
-          to='/pokemons'
+          to="/pokemons"
           component={Link}
           selected={location.pathname !== "/"}
         >
@@ -68,18 +68,18 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className={classes.root}>
-      <AppBar position='fixed' className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            edge='start'
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' noWrap>
+          <Typography variant="h6" noWrap>
             Pokedex App
           </Typography>
         </Toolbar>
@@ -88,7 +88,7 @@ export function Layout({ children }: LayoutProps) {
         <Hidden smUp>
           <Drawer
             style={{ flexShrink: 0 }}
-            variant='temporary'
+            variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
             open={mobileOpen}
             onClose={handleDrawerToggle}
@@ -102,12 +102,12 @@ export function Layout({ children }: LayoutProps) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation='css'>
+        <Hidden xsDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
             }}
-            variant='permanent'
+            variant="permanent"
             open
           >
             {drawer}
@@ -120,4 +120,4 @@ export function Layout({ children }: LayoutProps) {
       </main>
     </div>
   );
-}
+};
