@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent, Fragment } from "react";
 import {
   FormControl,
   Grid,
@@ -185,7 +185,7 @@ export const List = () => {
             const pokemonId = pokemon.id;
             if (Number(pokemonId) <= 898) {
               return (
-                <>
+                <Fragment key={pokemon.name}>
                   <Grid xs={3} />
                   <Grid
                     item
@@ -193,13 +193,12 @@ export const List = () => {
                     sm={6}
                     md={6}
                     lg={3}
-                    key={pokemon.name}
                     className={classes.pokemonCardContainer}
                   >
                     <PokemonCard pokemonData={pokemon} />
                   </Grid>
                   <Grid xs={3} />
-                </>
+                </Fragment>
               );
             }
             return null;

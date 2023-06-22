@@ -40,7 +40,7 @@ export const Details = () => {
     setLoading(true);
     try {
       const { data } = await api.get(`pokemon/${id}`);
-      setPokemon({
+      const returnedPokemon = {
         id: data.id,
         name: data.name,
         abilities: data.abilities.map((ability: any) => ability.ability.name),
@@ -52,7 +52,8 @@ export const Details = () => {
             value: stats.base_stat,
           };
         }),
-      });
+      };
+      setPokemon(returnedPokemon);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -64,10 +65,6 @@ export const Details = () => {
   useEffect(() => {
     getPokemon(id);
   }, [id]);
-
-  // useEffect(() => {
-  //   console.log(pokemon);
-  // }, [pokemon]);
 
   if (loading) {
     return (
@@ -94,12 +91,13 @@ export const Details = () => {
       </Grid>
       <Grid container>
         <Grid item lg={12} xs={12}>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div>
             <img
               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
                 id
               )}.png`}
               alt="Pokemon"
+              className={classes.image}
             />
           </div>
         </Grid>
@@ -120,23 +118,16 @@ export const Details = () => {
       </Grid>
       <Grid container lg={6}>
         <Grid item xs={6} sm={6} md={6} lg={6}>
-          <Typography
-            style={{
-              textAlign: "center",
-              fontSize: 24,
-              textTransform: "capitalize",
-            }}
-          >
-            Types
-          </Typography>
+          <Typography className={classes.titleSection}>Types</Typography>
           {pokemon?.types?.map((type) => {
-            let currentType = type;
-            let colorType = Object.entries(typePokemonColors).find((item) => {
+            const currentType = type;
+            const colorType = Object.entries(typePokemonColors).find((item) => {
               if (item[0] === currentType) {
                 return item[1];
               }
               return null;
             });
+
             return (
               <Typography
                 key={type}
@@ -153,15 +144,7 @@ export const Details = () => {
           })}
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6}>
-          <Typography
-            style={{
-              textAlign: "center",
-              fontSize: 24,
-              textTransform: "capitalize",
-            }}
-          >
-            Abilities
-          </Typography>
+          <Typography className={classes.titleSection}>Abilities</Typography>
           <Typography
             style={{ marginTop: 16, fontSize: 24, textTransform: "capitalize" }}
           >
@@ -169,35 +152,13 @@ export const Details = () => {
           </Typography>
         </Grid>
         <Grid item lg={12}>
-          <Typography
-            style={{
-              textAlign: "center",
-              fontSize: 24,
-              textTransform: "capitalize",
-            }}
-          >
-            Moves
-          </Typography>
+          <Typography className={classes.titleSection}>Moves</Typography>
           {pokemon.moves?.length !== 0 ? (
-            <Typography
-              style={{
-                marginLeft: 32,
-                marginRight: 32,
-                fontSize: 24,
-                textTransform: "capitalize",
-              }}
-            >
+            <Typography className={classes.textMove}>
               {pokemon?.moves?.join(", ")}
             </Typography>
           ) : (
-            <Typography
-              style={{
-                marginTop: 16,
-                fontSize: 24,
-                textTransform: "capitalize",
-                marginLeft: 32,
-              }}
-            >
+            <Typography className={classes.textNoMove}>
               No registers found!
             </Typography>
           )}

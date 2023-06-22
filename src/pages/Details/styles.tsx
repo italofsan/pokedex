@@ -9,13 +9,27 @@ export const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     titleText: {
-      fontSize: 72,
+      fontSize: 60,
       textTransform: "capitalize",
     },
     titleId: {
       color: "#ccc",
       marginLeft: 20,
-      fontSize: 72,
+      fontSize: 60,
+    },
+    titleSection: {
+      textAlign: "center",
+      fontSize: 24,
+      textTransform: "capitalize",
+      fontWeight: 700,
+    },
+    imageContainer: {
+      display: "flex",
+      justifyContent: "center",
+      width: "100%",
+    },
+    image: {
+      width: "100%",
     },
 
     textType: {
@@ -26,6 +40,18 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(4),
       textAlign: "center",
       borderRadius: 10,
+    },
+    textMove: {
+      marginLeft: 32,
+      marginRight: 32,
+      fontSize: 24,
+      textTransform: "capitalize",
+    },
+    textNoMove: {
+      marginTop: 16,
+      fontSize: 24,
+      textTransform: "capitalize",
+      marginLeft: 32,
     },
   })
 );
