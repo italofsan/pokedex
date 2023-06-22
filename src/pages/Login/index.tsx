@@ -35,12 +35,12 @@ export const Login = () => {
   };
 
   const fakeLogin = (values: LoginData) => {
-    if (!values.firstName) {
-      return errorMessage("Please, type your first name!");
-    }
-    if (!values.lastName) {
-      return errorMessage("Please, type your last name!");
-    }
+    // if (!values.firstName) {
+    //   return errorMessage("Please, type your first name!");
+    // }
+    // if (!values.lastName) {
+    //   return errorMessage("Please, type your last name!");
+    // }
 
     localStorage.clear();
     localStorage.setItem("signed", JSON.stringify(true));
@@ -54,7 +54,7 @@ export const Login = () => {
       initialValues={loginData}
       onSubmit={handleSubmit}
     >
-      {({ handleChange, values, handleSubmit }) => (
+      {({ handleChange, values }) => (
         <FormikForm>
           <Toolbar />
           <Grid container>

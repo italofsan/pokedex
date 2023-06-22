@@ -26,18 +26,13 @@ describe("Login", () => {
     const firstNameInput = screen.getByTestId("firstNameInput");
     const lastNameInput = screen.getByTestId("lastNameInput");
 
-    act(() => {
-      fireEvent.change(firstNameInput, { target: { value: "Italo" } });
-      fireEvent.change(lastNameInput, { target: { value: "Santos" } });
-    });
+    fireEvent.change(firstNameInput, { target: { value: "Italo" } });
+    fireEvent.change(lastNameInput, { target: { value: "Santos" } });
+    fireEvent.click(screen.getByRole("btnLogin"));
 
     await waitFor(() => {
       expect(firstNameInput).toHaveValue("Italo");
-    });
-    await waitFor(() => {
       expect(lastNameInput).toHaveValue("Santos");
     });
-
-    fireEvent.click(screen.getByRole("btnLogin"));
   });
 });
